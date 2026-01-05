@@ -1,0 +1,264 @@
+﻿<UserControl x:Class="SchoolJournalApp.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="900">
+
+    <UserControl.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#E3F2FD" Offset="0"/>
+            <GradientStop Color="#E0F7FA" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,30">
+            <StackPanel>
+                <TextBlock Text="Панель керування" FontSize="28" FontWeight="Bold" Foreground="#102A43"/>
+                <TextBlock Text="Огляд статистики за сьогодні" FontSize="14" Foreground="#546E7A" Margin="0,5,0,0"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <TextBlock x:Name="txtCurrentUser" Text="Завантаження..." VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#334E68" Margin="0,0,15,0"/>
+                <Border Width="40" Height="40" CornerRadius="20" Background="White">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                    </Border.Effect>
+                    <TextBlock x:Name="txtUserInitial" Text="?" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1565C0" FontWeight="Bold" FontSize="18"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <UniformGrid Grid.Row="1" Columns="3" Margin="0,0,0,30">
+            <Border CornerRadius="20" Margin="0,0,20,10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#4facfe" Offset="0.0"/>
+                        <GradientStop Color="#00f2fe" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect Color="#4facfe" BlurRadius="20" ShadowDepth="5" Opacity="0.3"/>
+                </Border.Effect>
+                <Grid Margin="25">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="👥" FontSize="32" Margin="0,0,0,10" Foreground="White"/>
+                        <TextBlock x:Name="txtStudentCount" Text="0" FontSize="40" FontWeight="Bold" Foreground="White"/>
+                        <TextBlock Text="Учнів у школі" FontSize="15" Foreground="White" Opacity="0.9"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border CornerRadius="20" Margin="0,0,20,10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#43E97B" Offset="0.0"/>
+                        <GradientStop Color="#38F9D7" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect Color="#43E97B" BlurRadius="20" ShadowDepth="5" Opacity="0.3"/>
+                </Border.Effect>
+                <Grid Margin="25">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="🏫" FontSize="32" Margin="0,0,0,10" Foreground="White"/>
+                        <TextBlock x:Name="txtClassCount" Text="0" FontSize="40" FontWeight="Bold" Foreground="White"/>
+                        <TextBlock Text="Активних класів" FontSize="15" Foreground="White" Opacity="0.9"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border x:Name="btnLessonsToday" CornerRadius="20" Margin="0,0,0,10" Cursor="Hand" MouseLeftButtonUp="BtnLessonsToday_Click">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#fa709a" Offset="0.0"/>
+                        <GradientStop Color="#fee140" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect Color="#fa709a" BlurRadius="20" ShadowDepth="5" Opacity="0.3"/>
+                </Border.Effect>
+                <Grid Margin="25">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="📚" FontSize="32" Margin="0,0,0,10" Foreground="White"/>
+                        <TextBlock x:Name="txtLessonCount" Text="0" FontSize="40" FontWeight="Bold" Foreground="White"/>
+                        <TextBlock Text="Уроків сьогодні (Натисніть)" FontSize="13" Foreground="White" Opacity="0.9"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </UniformGrid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="White" CornerRadius="20" Padding="15">
+                <Border.Effect>
+                    <DropShadowEffect Color="#B0C4DE" BlurRadius="20" ShadowDepth="5" Opacity="0.2"/>
+                </Border.Effect>
+                <Grid>
+                    <TextBlock Text="Навчальний календар" FontSize="16" FontWeight="Bold" Foreground="#102A43" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Viewbox Margin="0,40,0,0" Stretch="Uniform">
+                        <Calendar BorderThickness="0" Background="Transparent"/>
+                    </Viewbox>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Background="White" CornerRadius="20" Margin="25,0,0,0" Padding="25">
+                <Border.Effect>
+                    <DropShadowEffect Color="#B0C4DE" BlurRadius="20" ShadowDepth="5" Opacity="0.2"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="0,0,0,20">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📢 Шкільні оголошення" FontSize="18" FontWeight="Bold" Foreground="#102A43" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <Button Click="BtnAddAnnouncement_Click" HorizontalAlignment="Right" Cursor="Hand" ToolTip="Додати оголошення" Background="Transparent" BorderThickness="0">
+                            <Border Background="#E3F2FD" CornerRadius="8" Padding="12,6">
+                                <TextBlock Text="+ Додати" Foreground="#1565C0" FontWeight="Bold"/>
+                            </Border>
+                        </Button>
+                    </Grid>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="listAnnouncements">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F8FAFC" CornerRadius="10" Margin="0,0,10,10" Padding="15">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Foreground="#486581" FontSize="14" VerticalAlignment="Center"/>
+                                            <Button Grid.Column="1" Content="✕" Foreground="#EF9A9A" Background="Transparent" BorderThickness="0" 
+                                                    Cursor="Hand" Margin="10,0,0,0" FontSize="14" FontWeight="Bold"
+                                                    Tag="{Binding ID}" Click="BtnDeleteAnnouncement_Click"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Popup x:Name="PopupAddAnnouncement" Placement="Center" StaysOpen="False" AllowsTransparency="True">
+            <Border Background="White" CornerRadius="12" Padding="20" Width="350" BorderBrush="#2196F3" BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" Opacity="0.4"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="Нове оголошення" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                    <TextBox x:Name="txtNewAnnouncement" Height="80" TextWrapping="Wrap" AcceptsReturn="True" Padding="5" BorderBrush="#CFD8DC"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                        <Button Content="Скасувати" Click="BtnCancel_Click" Margin="0,0,10,0" Background="Transparent" BorderThickness="0" Foreground="Gray"/>
+                        <Button Content="Опублікувати" Click="BtnSaveAnnouncement_Click" Background="#2196F3" Foreground="White" Padding="15,5" FontWeight="Bold">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+        <Border x:Name="OverlayLessons" Background="#44000000" Visibility="Collapsed" MouseLeftButtonUp="BtnCloseLessons_Click" Grid.RowSpan="3" Panel.ZIndex="100"/>
+
+        <Border x:Name="PopupLessons" Width="500" Height="450" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                Background="White" CornerRadius="20" Visibility="Collapsed" Grid.RowSpan="3" Panel.ZIndex="101">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="10" Opacity="0.2"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" CornerRadius="20,20,0,0" Padding="20">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#fa709a" Offset="0"/>
+                            <GradientStop Color="#fee140" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📅" FontSize="24" Margin="0,0,10,0" Foreground="White"/>
+                        <TextBlock Text="Розклад на сьогодні" FontSize="22" FontWeight="Bold" Foreground="White"/>
+                    </StackPanel>
+                </Border>
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="15">
+                    <ItemsControl x:Name="listTodayLessons">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#F3F2FD" CornerRadius="12" Margin="0,0,0,10" Padding="15" BorderBrush="#E1F5FE" BorderThickness="1">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0" Width="40" Height="40" CornerRadius="20" Background="#FFFFFF" Margin="0,0,15,0">
+                                            <TextBlock Text="{Binding LessonNumber}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                       FontWeight="Bold" FontSize="18" Foreground="#fa709a"/>
+                                        </Border>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding SubjectName}" FontWeight="Bold" FontSize="16" Foreground="#102A43"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                                <Border Background="#E0F7FA" CornerRadius="4" Padding="6,2" Margin="0,0,5,0">
+                                                    <TextBlock Text="{Binding ClassName}" FontSize="12" FontWeight="SemiBold" Foreground="#006064"/>
+                                                </Border>
+                                                <TextBlock Text="{Binding Topic}" TextTrimming="CharacterEllipsis" MaxWidth="220" 
+                                                           FontSize="12" Foreground="#546E7A" VerticalAlignment="Center" FontStyle="Italic"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Column="2" Text="✅" FontSize="16" VerticalAlignment="Center" Opacity="0.5"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <Button Grid.Row="2" Content="Закрити" Click="BtnCloseLessons_Click" Margin="20" Height="40"
+                        Background="#F5F5F5" Foreground="#546E7A" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <TextBlock x:Name="txtNoLessons" Grid.Row="1" Text="На сьогодні уроків немає 🎉" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" 
+                           FontSize="16" Foreground="#90A4AE" Visibility="Collapsed"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

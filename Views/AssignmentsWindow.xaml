@@ -1,0 +1,86 @@
+﻿<Window x:Class="SchoolJournalApp.AssignmentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Керування Навантаженням Вчителя" MinHeight="500" MinWidth="600"
+        WindowStartupLocation="CenterScreen"
+        Background="#E3F2FD">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" x:Name="txtTitle" Text="📚 Навантаження для Вчителя" 
+                   FontSize="24" FontWeight="Bold" Foreground="#102A43" Margin="0,0,0,15"/>
+
+        <StackPanel Grid.Row="1">
+
+            <Border Background="White" CornerRadius="15" Padding="20" Margin="0,0,0,20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" Opacity="0.1" ShadowDepth="3"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="Додати нове призначення" FontSize="16" FontWeight="SemiBold" Foreground="#0277BD" Margin="0,0,0,10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                            <TextBlock Text="Предмет" Foreground="#78909C" FontSize="12"/>
+                            <ComboBox x:Name="cmbSubjects" Style="{StaticResource ModernComboBox}" 
+                                      DisplayMemberPath="SubjectName" SelectedValuePath="SubjectID" Margin="0,2,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                            <TextBlock Text="Клас" Foreground="#78909C" FontSize="12"/>
+                            <ComboBox x:Name="cmbClasses" Style="{StaticResource ModernComboBox}" 
+                                      DisplayMemberPath="ClassName" SelectedValuePath="ClassID" Margin="0,2,0,0"/>
+                        </StackPanel>
+
+                        <Button Grid.Column="2" Content="➕ Додати" 
+                                Style="{StaticResource ModernPrimaryButton}" 
+                                Click="BtnAddAssignment_Click"
+                                VerticalAlignment="Bottom" Width="100"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <TextBlock Text="Поточне навантаження" FontSize="16" FontWeight="SemiBold" Foreground="#102A43" Margin="0,0,0,10"/>
+            <DataGrid x:Name="gridAssignments" AutoGenerateColumns="False" 
+                      CanUserAddRows="False" IsReadOnly="True" 
+                      HeadersVisibility="Column" Background="White" BorderThickness="1" BorderBrush="#CFD8DC"
+                      RowHeight="35" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#F1F5F9"
+                      Height="200">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Предмет" Binding="{Binding SubjectName}" Width="*"/>
+                    <DataGridTextColumn Header="Клас" Binding="{Binding ClassName}" Width="150"/>
+                    <DataGridTemplateColumn Width="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="❌" 
+                    Tag="{Binding AssignmentID}" 
+                    Click="BtnDeleteAssignment_Click"
+                    Style="{StaticResource ModernDangerButton}"
+                    Width="50" Margin="5"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="0,20,0,0">
+            <Button Content="Закрити" 
+                    Style="{StaticResource BaseButtonStyle}"
+                    Background="Transparent" Foreground="#78909C" BorderThickness="0"
+                    Click="BtnClose_Click" 
+                    HorizontalAlignment="Right" Width="100"/>
+        </Grid>
+    </Grid>
+</Window>

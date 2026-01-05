@@ -1,0 +1,80 @@
+﻿<Window x:Class="SchoolJournalApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TEACHER HUB" 
+        MinWidth="1000" MinHeight="600"
+        WindowStartupLocation="CenterScreen" Background="#E3F2FD">
+
+    <Window.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Azure"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="20,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#4B5563"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E3F2FD"/>
+                    <Setter Property="Foreground" Value="#1565C0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="colMenu" Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="SideMenu" Grid.Column="0" Width="220" Background="#E3F2FD" CornerRadius="0,20,20,0" Visibility="Collapsed">
+            <Border.Effect>
+                <DropShadowEffect Color="#B0C4DE" BlurRadius="20" ShadowDepth="5" Opacity="0.3"/>
+            </Border.Effect>
+
+            <DockPanel Margin="15" LastChildFill="False">
+
+                <StackPanel DockPanel.Dock="Top">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,40">
+                        <TextBlock Text="🎓" FontSize="24"/>
+                        <StackPanel Margin="10,0,0,0">
+                            <TextBlock Text="TEACHER" FontSize="18" FontWeight="Bold" Foreground="#1565C0"/>
+                            <TextBlock Text="H U B" FontSize="14" Foreground="#64748B"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Button Click="NavToDashboard_Click" Content="📊 Панель" Height="45" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Click="NavToJournal_Click" Content="📖 Журнал" Height="45" Margin="0,5" Style="{StaticResource MenuButtonStyle}"/>
+
+                    <Button x:Name="btnTeachers" Click="NavToTeachers_Click" Content="👨‍🏫 Вчителі" Height="45" Margin="0,5" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button x:Name="btnSubjects" Click="NavToSubjects_Click" Content="📚 Предмети" Height="45" Margin="0,5" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button x:Name="btnStudents" Click="NavToStudents_Click" Content="👥 Учні" Height="45" Margin="0,5" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button x:Name="btnClasses" Click="NavToClasses_Click" Content="🏫 Класи" Height="45" Margin="0,5" Style="{StaticResource MenuButtonStyle}"/>
+                    <Button Click="NavToReports_Click" Content="📈 Звіти" Height="45" Margin="0,5" Style="{StaticResource MenuButtonStyle}"/>
+
+                    <Button x:Name="btnAccessControl" Click="NavToAccess_Click" Content="🔐 Безпека" Height="45" Margin="0,5" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                </StackPanel>
+
+                <Button DockPanel.Dock="Bottom" Click="BtnLogout_Click" Background="Transparent" BorderThickness="1" BorderBrush="#EF9A9A" Height="40" Cursor="Hand" Margin="0,0,0,20">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🚪" Margin="0,0,10,0"/>
+                        <TextBlock Text="Змінити БД" Foreground="#D32F2F"/>
+                    </StackPanel>
+                </Button>
+
+            </DockPanel>
+        </Border>
+
+        <ContentControl x:Name="MainContent" Grid.Column="1"/>
+    </Grid>
+</Window>
